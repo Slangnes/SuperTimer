@@ -23,6 +23,9 @@
             <option value="3">Supervisor 3</option>
         </select>
         <!--a button to record the task name-->
+    <!-- Task input fields, hidden by default -->
+    <div id="task-inputs" class="task-inputs hidden">
+        <div id="feedback"></div>
         <h2>Record Task</h2>
         <p>Enter the task name:</p>
         <input type="text" id="task-name" placeholder="Task Name">
@@ -31,6 +34,7 @@
         <p>Enter the number of people assigned:</p>
         <input type="number" id="peopleAssigned" placeholder="People Assigned">
         <button id="recordTaskButton">Record Task</button>
+    </div>
         <!--task data-->
         <div id="task-data"></div>
     </body>

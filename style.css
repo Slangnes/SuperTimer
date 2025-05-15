@@ -29,3 +29,46 @@
                 li {
                     margin-bottom: 10px;
                 }
+                select {
+                    padding: 5px;
+                    margin-bottom: 20px;
+                }
+                .task-inputs input, .task-inputs button {
+                    display: block;
+                    margin: 8px 0;
+                    padding: 8px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    font-size: 1em;
+                    width: 100%;
+                    max-width: 300px;
+                }
+                .task-inputs {
+                    background: #152722;
+                    padding: 16px;
+                    border-radius: 8px;
+                    margin-top: 16px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                }
+                .hidden {
+                    display: none;
+                }
+                #feedback {
+                    margin-top: 12px;
+                    padding: 10px 16px;
+                    border-radius: 6px;
+                    font-size: 1em;
+                    font-weight: 500;
+                    max-width: 350px;
+                    transition: background 0.3s, color 0.3s;
+                }
+                #feedback.error {
+                    background: #ffeaea;
+                    color: #b30000;
+                    border: 1px solid #ffb3b3;
+                }
+                #feedback.success {
+                    background: #eaffea;
+                    color: #217a36;
+                    border: 1px solid #b3ffb3;
+                }
