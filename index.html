@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SuperTimer</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    line-height: 1.6;
+                    background-color: white;
+                    color: black;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+                h1, h2, h3, a{
+                    color: #369061;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                    body {
+                        background-color: black;
+                        color: white;
+                    }
+                }
+                h1 {
+                    border-bottom: 2px solid #666;
+                    padding-bottom: 10px;
+                    margin-bottom: 20px;
+                }
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+                li {
+                    margin-bottom: 10px;
+                }
+            </style>
+    </head>
+    <body>
+        <h1>SuperTimer</h1>
+        <p>SuperTimer is a simple application for supervisors to track the time spent on tasks by their team members. It provides a straightforward interface to record the task, number of hours it took to complete, and number of people who were assigned to the task.</p>
+
+        <!--a dropdown list for available supervisors-->
+        <h2>Supervisors</h2>
+        <p>Choose a supervisor to view their tasks:</p>
+        <select id="supervisorSelect">
+            <option value="">Select a supervisor</option>
+            <option value="1">Supervisor 1</option>
+            <option value="2">Supervisor 2</option>
+            <option value="3">Supervisor 3</option>
+        </select>
+        <!--a button to record the task name-->
+        <h2>Record Task</h2>
+        <p>Enter the task name:</p>
+        <input type="text" id="taskName" placeholder="Task Name">
+        <p>Enter the number of hours spent:</p>
+        <input type="number" id="hoursSpent" placeholder="Hours Spent">
+        <p>Enter the number of people assigned:</p>
+        <input type="number" id="peopleAssigned" placeholder="People Assigned">
+        <button id="recordTaskButton">Record Task</button>
+    </body>
