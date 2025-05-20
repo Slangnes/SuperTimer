@@ -16,11 +16,13 @@
         <!--an input for supervisors ID-->
         <h2>Supervisor ID</h2>
         <p>Enter your supervisor ID:</p>
-        <input type="text" id="supervisor-id" placeholder="Supervisor ID">
-        <button id="NextButton">Next</button>
+<form id="supervisor-form" class="task-inputs">
+    <input type="text" id="supervisor-id" placeholder="Supervisor ID" required>
+    <button type="submit" id="NextButton">Next</button>
+</form>
         <!--a button to record the task name-->
     <!-- Task input fields, hidden by default -->
-    <div id="task-inputs" class="task-inputs ">
+    <div id="task-inputs" class="task-inputs hidden">
         <h2>Record Task</h2>
         <!--input form for Department, Work Line, Shift, Work Order dropdown, Time Hours, minute 15 min increments dropdown, number of team members-->
         <form id="task-form">

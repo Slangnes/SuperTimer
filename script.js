@@ -1,3 +1,17 @@
+// Store supervisor ID globally
+let supervisorId = "";
+
+// Handle supervisor form submission
+document.getElementById("supervisor-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const input = document.getElementById("supervisor-id");
+    supervisorId = input.value.trim();
+    if (supervisorId) {
+        document.getElementById("task-inputs").classList.remove("hidden");
+        document.getElementById("supervisor-form").classList.add("hidden");
+    }
+});
+
 // Handle the task form submission
 document.getElementById("task-form").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -47,8 +61,9 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
     // Get the current date and time
     var currentDate = new Date();
 
-    // Create a JSON object with the values
+    // Create a JSON object with the values, including supervisorId
     var taskData = {
+        supervisorId: supervisorId,
         department: department,
         workLine: workLine,
         shift: shift,
