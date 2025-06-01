@@ -9,16 +9,23 @@
         <!-- Link to the JavaScript file -->
         <script src="script.js" defer></script>
     </head>
+    <div id="navbar">
+        <button id="home-btn">Home</button>
+        <button id="show-supervisors-btn">Supervisors</button>
+        <button id="show-tasks-btn">Task Orders</button>
+        </div>
     <body>
         <h1>SuperTimer</h1>
         <p>SuperTimer is a simple application for supervisors to track the time spent on tasks by their team members. It provides a straightforward interface to record the task, number of hours it took to complete, and number of people who were assigned to the task.</p>
 
         <!--an input for supervisors ID-->
-        <h2>Supervisor ID</h2>
+<form id="supervisor-form">
+    <h2>Supervisor ID</h2>
         <p>Enter your supervisor ID:</p>
-<form id="supervisor-form" class="task-inputs">
+  <div class="supervisor-row">
     <input type="text" id="supervisor-id" placeholder="Supervisor ID" required>
     <button type="submit" id="NextButton">Next</button>
+  </div>
 </form>
         <!--a button to record the task name-->
     <!-- Task input fields, hidden by default -->
