@@ -58,23 +58,35 @@ function populateDropdowns(supervisor) {
     timeHoursSelect.innerHTML = Array.from({length: 25}, (_, i) => `<option value="${i}">${i}</option>`).join("");
 
     // Team Members (add if missing)
-    let teamMembersInput = document.getElementById("team-members");
-    if (!teamMembersInput) {
-        teamMembersInput = document.createElement("input");
-        teamMembersInput.type = "number";
-        teamMembersInput.id = "team-members";
-        teamMembersInput.min = "1";
-        teamMembersInput.placeholder = "Team Members";
-        // Insert before feedback div
-        const taskForm = document.getElementById("task-form");
-        const feedbackDiv = document.getElementById("feedback");
-               if (feedbackDiv && feedbackDiv.parentNode) {
-            feedbackDiv.parentNode.insertBefore(teamMembersInput, feedbackDiv);
-        } else {
-            console.error("feedback div not found in DOM or has no parent.");
-        }
+let teamMembersSelect = document.getElementById("team-members");
+if (!teamMembersSelect) {
+    teamMembersSelect = document.createElement("select");
+    teamMembersSelect.id = "team-members";
+    teamMembersSelect.style.marginBottom = "16px";
+    // Add options 1-20
+    for (let i = 1; i <= 20; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        teamMembersSelect.appendChild(option);
     }
-    teamMembersInput.value = "";
+    // Add label for accessibility
+    const label = document.createElement("label");
+    label.htmlFor = "team-members";
+    label.textContent = "Team Members:";
+    label.style.display = "block";
+    label.style.marginTop = "8px";
+    // Insert before task-form-buttons div
+    const taskForm = document.getElementById("task-form");
+    const taskFormButtons = document.getElementById("task-form-buttons");
+    if (taskFormButtons && taskFormButtons.parentNode) {
+        taskFormButtons.parentNode.insertBefore(label, taskFormButtons);
+        taskFormButtons.parentNode.insertBefore(teamMembersSelect, taskFormButtons);
+    } else {
+        console.error("task-form-buttons div not found in DOM or has no parent.");
+    }
+}
+teamMembersSelect.value = "1";
 }
 
 // Handle supervisor form submission

@@ -30,39 +30,38 @@
     <div id="task-inputs" class="task-inputs hidden">
     <h2>Record Task</h2>
     <form id="task-form">
-        <label for="department">Department:</label>
-        <select id="department"></select>
-        <br>
+    <label for="department">Department:</label>
+    <select id="department"></select>
+    <br>
 
-        <label for="work-line">Work Line:</label>
-        <select id="work-line"></select>
-        <br>
+    <label for="work-line">Work Line:</label>
+    <select id="work-line"></select>
+    <br>
 
-        <label for="shift">Shift:</label>
-        <select id="shift"></select>
-        <br>
+    <label for="shift">Shift:</label>
+    <select id="shift"></select>
+    <br>
 
-        <label for="work-order">Work Order:</label>
-        <select id="work-order"></select>
-        <br>
+    <label for="work-order">Work Order:</label>
+    <select id="work-order"></select>
+    <br>
 
-        <label for="time-hours">Time (Hours):</label>
-        <select id="time-hours"></select>
-        <label for="time-minutes" style="margin-left:8px;">Minutes:</label>
-        <select id="time-minutes">
-            <option value="0">00</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-            <option value="45">45</option>
-        </select>
-        <br>
-
-        <div style="display: flex; gap: 12px; margin-top: 16px;">
-            <button type="button" id="submit-add-another">Submit and Add Another</button>
-            <button type="button" id="submit-close">Submit and Close</button>
-        </div>
-    </form>
-    <div id="feedback"></div>
+    <label for="time-hours">Time (Hours):</label>
+    <select id="time-hours"></select>
+    <label for="time-minutes" style="margin-left:8px;">Minutes:</label>
+    <select id="time-minutes">
+        <option value="0">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
+    <br>
+    <div style="display: flex; gap: 12px; margin-top: 16px;" id="task-form-buttons">
+        <button type="button" id="submit-add-another" class="task-submit-btn">Submit and Add Another</button>
+        <button type="button" id="submit-close" class="task-submit-btn">Submit and Close</button>
+    </div>
+</form>
+<div id="feedback"></div>
 </div>
 
         <!--task data-->

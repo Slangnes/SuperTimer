@@ -169,3 +169,19 @@ select {
   flex: 1 1 auto;
   min-width: 0;
 }
+
+.task-submit-btn {
+  background: #5734b7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.task-submit-btn:hover {
+  background: #3a1bb3;
+}
