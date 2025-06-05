@@ -129,7 +129,6 @@ document.getElementById("supervisor-form").addEventListener("submit", function(e
 
 // Handle the task form submission
 function handleTaskSubmission(closeAfter) {
-    // ...get values as before...
     var department = document.getElementById("department").value.trim();
     var workLine = document.getElementById("work-line").value.trim();
     var shift = document.getElementById("shift").value.trim();
@@ -142,7 +141,7 @@ function handleTaskSubmission(closeAfter) {
     feedbackDiv.textContent = "";
     feedbackDiv.className = "";
 
-    // Input validation (same as before)
+    // Input validation
     if (!department || !workLine || !shift || !workOrder || hours === "" || minutes === "" || !teamMembers) {
         feedbackDiv.textContent = "Please fill in all fields.";
         feedbackDiv.className = "error";
@@ -214,8 +213,7 @@ function handleTaskSubmission(closeAfter) {
         }
     }, 5000);
 }
-
-// Remove the old submit event for #task-form and add:
+// Handle task form submission
 document.getElementById("submit-add-another").addEventListener("click", function() {
     handleTaskSubmission(false);
 });
@@ -229,7 +227,7 @@ document.getElementById("show-supervisors-btn").addEventListener("click", functi
     showModal("Supervisors", list);
 });
 
-// Simple modal function (add a div with id="modal" to your HTML)
+// Simple modal function
 function showModal(title, content) {
     let overlay = document.getElementById("modal-overlay");
     let modal = document.getElementById("modal");
