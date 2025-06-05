@@ -9,12 +9,10 @@
         <!-- Link to the JavaScript file -->
         <script src="script.js" defer></script>
     </head>
-    <div id="navbar">
-        <button id="home-btn">Home</button>
-        <button id="show-supervisors-btn">Supervisors</button>
-        <button id="show-tasks-btn">Task Orders</button>
-        </div>
     <body>
+        <div id="navbar">
+        <button id="show-supervisors-btn">Supervisors</button>
+        </div>
         <h1>SuperTimer</h1>
         <p>SuperTimer is a simple application for supervisors to track the time spent on tasks by their team members. It provides a straightforward interface to record the task, number of hours it took to complete, and number of people who were assigned to the task.</p>
 
@@ -30,41 +28,43 @@
         <!--a button to record the task name-->
     <!-- Task input fields, hidden by default -->
     <div id="task-inputs" class="task-inputs hidden">
-        <h2>Record Task</h2>
-        <!--input form for Department, Work Line, Shift, Work Order dropdown, Time Hours, minute 15 min increments dropdown, number of team members-->
-        <form id="task-form">
-            <label for="department">Department:</label>
-            <input type="text" id="department" required>
+    <h2>Record Task</h2>
+    <form id="task-form">
+        <label for="department">Department:</label>
+        <select id="department"></select>
+        <br>
 
-            <label for="work-line">Work Line:</label>
-            <input type="text" id="work-line" required>
+        <label for="work-line">Work Line:</label>
+        <select id="work-line"></select>
+        <br>
 
-            <label for="shift">Shift:</label>
-            <input type="text" id="shift" required>
+        <label for="shift">Shift:</label>
+        <select id="shift"></select>
+        <br>
 
-            <label for="work-order">Work Order:</label>
-            <input type="text" id="work-order" required>
-            <div>
-            <label for="time-hours">Time (Hours):</label>
-            <input type="number" id="time-hours" min="0" required>
+        <label for="work-order">Work Order:</label>
+        <select id="work-order"></select>
+        <br>
 
-            <label for="time-minutes">Time (Minutes):</label>
-            <select id="time-minutes">
-                <!--15 min increments-->
-                <option value="0">00</option>
-                <option value="15">15</option>
-                <option value="30">30</option>
-                <option value="45">45</option>
-            </select>
-            </div>
-            <div>
-            <label for="team-members">Number of Team Members:</label>
-            <input type="number" id="team-members" min="1" required>
-            </div>
-            <button type="submit">Record Task</button>
-        </form>
-        <div id="feedback"></div>
-    </div>
+        <label for="time-hours">Time (Hours):</label>
+        <select id="time-hours"></select>
+        <label for="time-minutes" style="margin-left:8px;">Minutes:</label>
+        <select id="time-minutes">
+            <option value="0">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+        </select>
+        <br>
+
+        <div style="display: flex; gap: 12px; margin-top: 16px;">
+            <button type="button" id="submit-add-another">Submit and Add Another</button>
+            <button type="button" id="submit-close">Submit and Close</button>
+        </div>
+    </form>
+    <div id="feedback"></div>
+</div>
+
         <!--task data-->
         <div id="task-data"></div>
     </body>

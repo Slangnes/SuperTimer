@@ -1,64 +1,123 @@
 // Mock data for supervisors and task orders
 const mockSupervisors = [
-    { id: "S001", name: "Alice Smith" },
-    { id: "S002", name: "Bob Johnson" },
-    { id: "S003", name: "Charlie Lee" }
-];
-
-const mockTaskOrders = [
-    { order: "WO1001", description: "Assemble Widget A", supervisorId: "S001" },
-    { order: "WO1002", description: "Inspect Widget B", supervisorId: "S002" },
-    { order: "WO1003", description: "Package Widget C", supervisorId: "S001" }
+    {
+        id: "S001",
+        name: "Alice Smith",
+        department: "Assembly",
+        workLine: "Line 1",
+        shift: "Morning",
+        tasks: [
+            {
+                workOrder: "WO1001",
+                description: "Assemble Widget A",
+                time: { hours: 2, minutes: 30 }
+            }
+        ]
+    },
+    {
+        id: "S002",
+        name: "Bob Johnson",
+        department: "Inspection",
+        workLine: "Line 2",
+        shift: "Evening",
+        tasks: [
+            {
+                workOrder: "WO1002",
+                description: "Inspect Widget B",
+                time: { hours: 1, minutes: 45 }
+            }
+        ]
+    }
 ];
 
 // Store supervisor ID globally
 let supervisorId = "";
 
+// Populate dropdowns based on supervisor
+function populateDropdowns(supervisor) {
+    // Department
+    const departmentSelect = document.getElementById("department");
+    departmentSelect.innerHTML = `<option value="${supervisor.department}">${supervisor.department}</option>`;
+
+    // Work Line
+    const workLineSelect = document.getElementById("work-line");
+    workLineSelect.innerHTML = `<option value="${supervisor.workLine}">${supervisor.workLine}</option>`;
+
+    // Shift
+    const shiftSelect = document.getElementById("shift");
+    shiftSelect.innerHTML = `<option value="${supervisor.shift}">${supervisor.shift}</option>`;
+
+    // Work Order
+    const workOrderSelect = document.getElementById("work-order");
+    workOrderSelect.innerHTML = supervisor.tasks
+        .map(task => `<option value="${task.workOrder}">${task.workOrder} - ${task.description}</option>`)
+        .join("");
+
+    // Time Hours
+    const timeHoursSelect = document.getElementById("time-hours");
+    timeHoursSelect.innerHTML = Array.from({length: 25}, (_, i) => `<option value="${i}">${i}</option>`).join("");
+
+    // Team Members (add if missing)
+    let teamMembersInput = document.getElementById("team-members");
+    if (!teamMembersInput) {
+        teamMembersInput = document.createElement("input");
+        teamMembersInput.type = "number";
+        teamMembersInput.id = "team-members";
+        teamMembersInput.min = "1";
+        teamMembersInput.placeholder = "Team Members";
+        // Insert before feedback div
+        const taskForm = document.getElementById("task-form");
+        const feedbackDiv = document.getElementById("feedback");
+               if (feedbackDiv && feedbackDiv.parentNode) {
+            feedbackDiv.parentNode.insertBefore(teamMembersInput, feedbackDiv);
+        } else {
+            console.error("feedback div not found in DOM or has no parent.");
+        }
+    }
+    teamMembersInput.value = "";
+}
+
 // Handle supervisor form submission
 document.getElementById("supervisor-form").addEventListener("submit", function(e) {
     e.preventDefault();
+    console.log("Supervisor ID submission received")
     const input = document.getElementById("supervisor-id");
     supervisorId = input.value.trim();
-    if (supervisorId) {
-        document.getElementById("task-inputs").classList.remove("hidden");
-        document.getElementById("supervisor-form").classList.add("hidden");
+
+    // Check if supervisorId exists in mockSupervisors
+    const supervisor = mockSupervisors.find(s => s.id.toLowerCase() === supervisorId.toLowerCase());
+
+    // Feedback div for supervisor form
+    let feedbackDiv = document.getElementById("supervisor-feedback");
+    if (!feedbackDiv) {
+        feedbackDiv = document.createElement("div");
+        feedbackDiv.id = "supervisor-feedback";
+        input.parentNode.appendChild(feedbackDiv);
     }
-});
+    feedbackDiv.textContent = "";
+    feedbackDiv.className = "";
 
-//home button will reset the form and supervisorId
-document.getElementById("home-btn").addEventListener("click", function() {
-    // Reset supervisorId
-    supervisorId = "";
+    if (!supervisorId) {
+        feedbackDiv.textContent = "Please enter a supervisor ID.";
+        feedbackDiv.className = "error";
+        return;
+    }
+    if (!supervisor) {
+        feedbackDiv.textContent = "Supervisor ID not found. Please check and try again.";
+        feedbackDiv.className = "error";
+        return;
+    }
 
-    // Show supervisor form, hide task inputs
-    document.getElementById("supervisor-form").classList.remove("hidden");
-    document.getElementById("task-inputs").classList.add("hidden");
+    // Populate dropdowns
+    populateDropdowns(supervisor);
 
-    // Clear supervisor input
-    document.getElementById("supervisor-id").value = "";
-
-    // Clear feedback and task data
-    var feedbackDiv = document.getElementById("feedback");
-    if (feedbackDiv) feedbackDiv.textContent = "";
-
-    var taskDataDiv = document.getElementById("task-data");
-    if (taskDataDiv) taskDataDiv.innerHTML = "";
-
-    // Optionally clear task form fields
-    document.getElementById("department").value = "";
-    document.getElementById("work-line").value = "";
-    document.getElementById("shift").value = "";
-    document.getElementById("work-order").value = "";
-    document.getElementById("time-hours").value = "";
-    document.getElementById("time-minutes").value = "0";
-    document.getElementById("team-members").value = "";
+    document.getElementById("task-inputs").classList.remove("hidden");
+    document.getElementById("supervisor-form").classList.add("hidden");
 });
 
 // Handle the task form submission
-document.getElementById("task-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    // Get values from the input fields
+function handleTaskSubmission(closeAfter) {
+    // ...get values as before...
     var department = document.getElementById("department").value.trim();
     var workLine = document.getElementById("work-line").value.trim();
     var shift = document.getElementById("shift").value.trim();
@@ -66,16 +125,12 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
     var hours = document.getElementById("time-hours").value;
     var minutes = document.getElementById("time-minutes").value;
     var teamMembers = document.getElementById("team-members").value;
-    var feedbackDiv = document.getElementById("feedback") || document.createElement("div");
-    feedbackDiv.id = "feedback";
-    if (!document.getElementById("feedback")) {
-        document.getElementById("task-form").appendChild(feedbackDiv);
-    }
+    var feedbackDiv = document.getElementById("feedback");
 
     feedbackDiv.textContent = "";
     feedbackDiv.className = "";
 
-    // Input validation
+    // Input validation (same as before)
     if (!department || !workLine || !shift || !workOrder || hours === "" || minutes === "" || !teamMembers) {
         feedbackDiv.textContent = "Please fill in all fields.";
         feedbackDiv.className = "error";
@@ -120,12 +175,12 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
         timeRecorded: currentDate.toLocaleTimeString()
     };
 
-    // Display the JSON object in a div with id "task-data"
-    var taskDataDiv = document.getElementById("task-data") || document.createElement("div");
-    taskDataDiv.id = "task-data";
-    if (!document.getElementById("task-data")) {
-        document.body.appendChild(taskDataDiv);
-    }
+    // Show success feedback
+    feedbackDiv.textContent = "Task recorded successfully!";
+    feedbackDiv.className = "success";
+
+    // Display the JSON object below feedback
+    var taskDataDiv = document.getElementById("task-data");
     taskDataDiv.innerHTML = "<h3>Task Data:</h3><pre>" + JSON.stringify(taskData, null, 2) + "</pre>";
 
     // Clear the input fields
@@ -139,25 +194,27 @@ document.getElementById("task-form").addEventListener("submit", function(e) {
 
     // Hide the task data and input form div after 5 seconds
     setTimeout(function() {
+        feedbackDiv.textContent = "";
         taskDataDiv.innerHTML = "";
-        document.getElementById("task-inputs").classList.add("hidden");
+        if (closeAfter) {
+            document.getElementById("task-inputs").classList.add("hidden");
+            document.getElementById("supervisor-form").classList.remove("hidden");
+        }
     }, 5000);
+}
 
-    // Show success feedback
-    feedbackDiv.textContent = "Task recorded successfully!";
-    feedbackDiv.className = "success";
+// Remove the old submit event for #task-form and add:
+document.getElementById("submit-add-another").addEventListener("click", function() {
+    handleTaskSubmission(false);
+});
+document.getElementById("submit-close").addEventListener("click", function() {
+    handleTaskSubmission(true);
 });
 
 // Show supervisors
 document.getElementById("show-supervisors-btn").addEventListener("click", function() {
     let list = mockSupervisors.map(s => `${s.id}: ${s.name}`).join("<br>");
     showModal("Supervisors", list);
-});
-
-// Show task orders
-document.getElementById("show-tasks-btn").addEventListener("click", function() {
-    let list = mockTaskOrders.map(t => `${t.order}: ${t.description} (Supervisor: ${t.supervisorId})`).join("<br>");
-    showModal("Task Orders", list);
 });
 
 // Simple modal function (add a div with id="modal" to your HTML)
@@ -212,7 +269,3 @@ function closeModal() {
     if (overlay) overlay.style.display = "none";
 }
 
-//theme selector
-document.getElementById("theme-selector").addEventListener("change", function() {
-    document.documentElement.setAttribute("data-theme", this.value);
-});
