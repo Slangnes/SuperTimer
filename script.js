@@ -47,15 +47,9 @@ function populateDropdowns(supervisor) {
     const shiftSelect = document.getElementById("shift");
     shiftSelect.innerHTML = `<option value="${supervisor.shift}">${supervisor.shift}</option>`;
 
-    // Work Order
-    const workOrderSelect = document.getElementById("work-order");
-    workOrderSelect.innerHTML = supervisor.tasks
-        .map(task => `<option value="${task.workOrder}">${task.workOrder} - ${task.description}</option>`)
-        .join("");
-
     // Time Hours
     const timeHoursSelect = document.getElementById("time-hours");
-    timeHoursSelect.innerHTML = Array.from({length: 25}, (_, i) => `<option value="${i}">${i}</option>`).join("");
+    timeHoursSelect.innerHTML = Array.from({length: 13}, (_, i) => `<option value="${i}">${i}</option>`).join("");
 
     // Team Members (add if missing)
 let teamMembersSelect = document.getElementById("team-members");
